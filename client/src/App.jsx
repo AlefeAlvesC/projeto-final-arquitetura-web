@@ -1,41 +1,37 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { useContext } from 'react';
-import { AuthContext, AuthProvider } from './context/AuthContext';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
 
 // Páginas (crie componentes simples temporários para testar)
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import AdminDashboard from './pages/AdminDashboard';
+import Layout from './components/Layout';
+import ProtectedAdminRoute from './components/ProtectedAdminRoute';
 
-const ProtectedAdminRoute = ({ children }) => {
-  const { user, loading } = useContext(AuthContext);
-
-  if (loading) return <div>Carregando...</div>;
-  if (!user || user.role !== 'admin') {
-    return <Navigate to="/" replace />;
-  }
-  return children;
-};
 
 export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route element={<Layout />} >
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="*" element={<p className="p-10 text-center">Página não encontrada.</p>} />
+
           
-          {/* Rota Protegida de Admin */}
-          <Route 
-            path="/admin" 
-            element={
-              <ProtectedAdminRoute>
-                <AdminDashboard />
-              </ProtectedAdminRoute>
-            } 
-          />
+            {/* Rota Protegida de Admin */}
+            <Route 
+              path="/admin" 
+              element={
+                <ProtectedAdminRoute>
+                  <AdminDashboard />
+                </ProtectedAdminRoute>
+              } 
+            />
+          </Route>
         </Routes>
       </BrowserRouter>
     </AuthProvider>

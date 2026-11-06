@@ -1,1 +1,20 @@
 @import "tailwindcss";
+
+@theme {
+  /* Paleta (style guide) */
+  --color-brand-ink: #090129;
+  --color-brand-pink: #ff55df;
+  --color-brand-green: #8fff24;
+  --color-brand-purple-dark: #430091;
+  --color-brand-purple: #780bf7;
+  --color-brand-gray: #efefef;
+  --color-brand-gray-dark: #444444;
+
+  /* Tipografia */
+  --font-display: "Orbitron", sans-serif;
+  --font-sans: "Poppins", sans-serif;
+}
+
+body {
+  @apply bg-white font-sans text-brand-ink antialiased;
+}
