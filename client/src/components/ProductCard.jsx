@@ -1,10 +1,15 @@
+import { Link } from "react-router-dom";
 import { formatPrice } from "../utils/format";
 
 export default function ProductCard({ product }) {
   const outOfStock = product.stock <= 0;
 
   return (
-    <article className="group flex flex-col overflow-hidden bg-brand-gray shadow-sm transition-shadow hover:shadow-md focus-within:ring-2 focus-within:ring-brand-purple">
+    <Link
+      to={`/produtos/${product._id}`}
+      aria-label={`Ver detalhes de ${product.name}`}
+      className="group flex flex-col overflow-hidden bg-brand-gray shadow-sm transition-shadow hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-purple"
+    >
       <div className="relative aspect-square bg-white">
         <img
           src={product.imageUrl}
@@ -29,6 +34,7 @@ export default function ProductCard({ product }) {
           {formatPrice(product.price)}
         </p>
       </div>
-    </article>
+
+    </Link>
   );
 }

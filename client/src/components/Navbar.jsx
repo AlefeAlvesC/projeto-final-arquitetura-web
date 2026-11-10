@@ -11,6 +11,24 @@ import {
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import Logo from "./Logo";
+import { useCart } from "../context/CartContext";
+
+function CartLink({ count }) {
+  return (
+    <Link
+      to="/cart"
+      aria-label={`Carrinho, ${count} ${count === 1 ? "item" : "itens"}`}
+      className="relative hover:text-brand-purple"
+    >
+      <ShoppingCart size={22} />
+      {count > 0 && (
+        <span className="absolute -right-2 -top-2 flex h-5 min-w-5 items-center justify-center rounded-full bg-brand-pink px-1 text-[10px] font-bold text-brand-ink">
+          {count}
+        </span>
+      )}
+    </Link>
+  );
+}
 
 function SearchBar({ className = "", onSearch }) {
   const [term, setTerm] = useState("");
@@ -43,6 +61,7 @@ function SearchBar({ className = "", onSearch }) {
 
 export default function Navbar() {
   const { user, logout } = useAuth();
+  const { count } = useCart();
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -102,16 +121,12 @@ export default function Navbar() {
               </Link>
             </>
           )}
-          <Link to="/cart" aria-label="Carrinho" className="hover:text-brand-purple">
-            <ShoppingCart size={22} />
-          </Link>
+          <CartLink count={count} />
         </nav>
 
         {/* Mobile: carrinho + hambúrguer */}
         <div className="flex items-center gap-4 md:hidden">
-          <Link to="/cart" aria-label="Carrinho">
-            <ShoppingCart size={22} />
-          </Link>
+          <CartLink count={count} />
           <button
             onClick={() => setMenuOpen((open) => !open)}
             aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
