@@ -3,6 +3,8 @@ const variants = {
     "bg-brand-purple text-white hover:bg-brand-purple-dark focus-visible:outline-brand-pink",
   outline:
     "border-2 border-brand-purple-dark text-brand-purple-dark hover:bg-brand-purple-dark hover:text-white",
+  danger:
+    "bg-brand-pink text-brand-ink hover:opacity-90 focus-visible:outline-brand-ink",
 };
 
 export default function Button({

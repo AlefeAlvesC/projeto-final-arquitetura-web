@@ -18,7 +18,7 @@ export default function ProtectedAdminRoute({ children }) {
   if (!user) return <Navigate to="/login" state={{ from: location }} replace />;
 
   // Logado, mas sem permissão
-  if (user.role !== "admin") return <Navigate to="/" replace />;
+  if (user.role !== "Admin") return <Navigate to="/" replace />;
 
   return children;
 }
