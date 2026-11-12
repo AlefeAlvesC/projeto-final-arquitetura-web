@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 const verifyToken = (req, res, next) => {
   const authHeader = req.headers.authorization;
-  if (!authHeader) return res.status(401.0).json({ message: 'Token não fornecido' });
+  if (!authHeader) return res.status(401).json({ message: 'Token não fornecido' });
 
   const token = authHeader.split(' ')[1];
   try {
@@ -10,8 +10,12 @@ const verifyToken = (req, res, next) => {
     req.user = decoded;
     next();
   } catch (err) {
-    res.status(403).json({ message: 'Token inválido' });
-  }
+  const message =
+    err.name === 'TokenExpiredError'
+      ? 'Sessão expirada. Faça login novamente.'
+      : 'Token inválido';
+  res.status(401).json({ message });
+}
 };
 
 const verifyAdmin = (req, res, next) => {

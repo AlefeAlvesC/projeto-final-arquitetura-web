@@ -9,6 +9,10 @@ const register = async (req, res) => {
     const existingUser = await User.findOne({ email: email });
     if (existingUser) return res.status(400).json({ message: 'E-mail já cadastrado' });
 
+    if (!name || !email || !password || password.length < 6) {
+      return res.status(400).json({ message: 'Nome, e-mail e senha (mínimo 6 caracteres) são obrigatórios' });
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = new User({
