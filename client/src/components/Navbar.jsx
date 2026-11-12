@@ -160,7 +160,7 @@ export default function Navbar() {
               <span className="flex items-center gap-2 text-sm text-brand-gray-dark">
                 <User size={18} /> Olá, {user.name?.split(" ")[0]}
               </span>
-              {user.role === "admin" && (
+              {user.role === "Admin" && (
                 <Link to="/admin" onClick={closeMenu} className={linkClass}>
                   <LayoutDashboard size={18} /> Painel Admin
                 </Link>
