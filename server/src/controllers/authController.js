@@ -2,6 +2,20 @@ const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+const generateToken = (user) =>
+  jwt.sign(
+    { id: user._id, role: user.role, name: user.name },
+    process.env.JWT_SECRET,
+    { expiresIn: '1d' }
+  );
+
+const formatUser = (user) => ({
+  id: user._id,
+  name: user.name,
+  email: user.email,
+  role: user.role,
+});
+
 const register = async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -22,7 +36,7 @@ const register = async (req, res) => {
     });
 
     await user.save();
-    res.status(201).json({ message: 'Usuário cadastrado com sucesso!' });
+    res.status(201).json({ token: generateToken(user), user: formatUser(user) });
   } catch (error) {
     res.status(500).json({ message: 'Erro no servidor', error: error.message });
   }
@@ -37,13 +51,7 @@ const login = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ message: 'Credenciais inválidas' });
 
-    const token = jwt.sign(
-      { id: user._id, role: user.role, name: user.name },
-      process.env.JWT_SECRET,
-      { expiresIn: '1d' }
-    );
-
-    res.json({ token, user: { id: user._id, name: user.name, email: user.email, role: user.role } });
+    res.json({ token: generateToken(user), user: formatUser(user) });
   } catch (error) {
     res.status(500).json({ message: 'Erro no servidor', error: error.message });
   }
