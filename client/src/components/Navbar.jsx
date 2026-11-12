@@ -8,6 +8,7 @@ import {
   X,
   LogOut,
   LayoutDashboard,
+  Package,
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import Logo from "./Logo";
@@ -103,6 +104,9 @@ export default function Navbar() {
                   <LayoutDashboard size={18} /> Painel Admin
                 </Link>
               )}
+              <Link to="/meus-pedidos" className={linkClass}>
+                <Package size={18} /> Meus pedidos
+              </Link>
               <span className="flex items-center gap-2 text-sm">
                 <User size={20} />
                 {user.name?.split(" ")[0]}
@@ -161,6 +165,9 @@ export default function Navbar() {
                   <LayoutDashboard size={18} /> Painel Admin
                 </Link>
               )}
+              <Link to="/meus-pedidos" onClick={closeMenu} className={linkClass}>
+                <Package size={18} /> Meus pedidos
+              </Link>
               <button onClick={handleLogout} className={linkClass}>
                 <LogOut size={18} /> Sair
               </button>

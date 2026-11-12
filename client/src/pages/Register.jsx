@@ -12,7 +12,6 @@ const initialForm = {
   email: "",
   password: "",
   confirmPassword: "",
-  role: "user",
 };
 
 
@@ -118,23 +117,6 @@ export default function Register() {
           onChange={handleChange}
           error={fieldErrors.confirmPassword}
         />
-
-        {/* Apenas para facilitar testes (remover antes da entrega final, se desejar) */}
-        <div className="flex flex-col gap-1.5">
-          <label htmlFor="role" className="text-sm font-semibold">
-            Tipo de conta <span className="font-normal text-brand-gray-dark">(modo teste)</span>
-          </label>
-          <select
-            id="role"
-            name="role"
-            value={form.role}
-            onChange={handleChange}
-            className="w-full rounded-full border-2 border-brand-ink bg-white px-5 py-3 text-sm outline-none focus:border-brand-pink"
-          >
-            <option value="user">Usuário comum</option>
-            <option value="admin">Administrador</option>
-          </select>
-        </div>
 
         <Button type="submit" disabled={loading} className="mt-2">
           {loading ? <Spinner /> : "Criar conta"}

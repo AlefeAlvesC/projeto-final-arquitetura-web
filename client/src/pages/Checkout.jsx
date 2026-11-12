@@ -68,9 +68,14 @@ export default function Checkout() {
           Seu pedido no valor de <strong>{formatPrice(paidTotal)}</strong> foi
           registrado. Obrigado por comprar na GeekVerse Store.
         </p>
-        <Link to="/">
-          <Button>Continuar comprando</Button>
-        </Link>
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <Link to="/meus-pedidos">
+            <Button>Ver meus pedidos</Button>
+          </Link>
+          <Link to="/">
+            <Button variant="outline">Continuar comprando</Button>
+          </Link>
+        </div>
       </section>
     );
   }
