@@ -4,22 +4,10 @@ import { formatDate, formatPrice } from "../../utils/format";
 import Button from "../ui/Button";
 import Alert from "../ui/Alert";
 import StatCard from "./StatCard";
+import StatusBadge from "../ui/StatusBadge";
 
 // Produto apagado depois da compra chega como null no populate
 const productName = (item) => item.product?.name ?? "Produto removido";
-
-function StatusBadge({ status }) {
-  const pending = status === "Pendente";
-  return (
-    <span
-      className={`inline-block rounded-full px-3 py-1 text-xs font-semibold ${
-        pending ? "bg-brand-gray text-brand-gray-dark" : "bg-brand-green text-brand-ink"
-      }`}
-    >
-      {status}
-    </span>
-  );
-}
 
 function ItemsList({ items }) {
   return (
