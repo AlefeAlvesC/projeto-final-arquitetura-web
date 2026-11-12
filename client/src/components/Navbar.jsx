@@ -8,6 +8,7 @@ import {
   X,
   LogOut,
   LayoutDashboard,
+  Package,
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import Logo from "./Logo";
