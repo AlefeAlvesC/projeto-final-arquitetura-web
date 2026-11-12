@@ -99,7 +99,7 @@ export default function Navbar() {
         <nav className="hidden items-center gap-5 md:flex" aria-label="Principal">
           {user ? (
             <>
-              {user.role === "admin" && (
+              {user.role === "Admin" && (
                 <Link to="/admin" className={linkClass}>
                   <LayoutDashboard size={18} /> Painel Admin
                 </Link>
