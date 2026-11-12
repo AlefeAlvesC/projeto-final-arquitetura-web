@@ -7,10 +7,10 @@
   "dev": "node server.js",
   "start": "node server.js",
   "test": "echo \"Error: no test specified\" && exit 1",
-  "seed": "node seeds/seedAdmin.js",
-  "seed:products": "node seeds/seedProducts.js",
-  "seed:all": "node seeds/seedAdmin.js && node seeds/seedProducts.js",
-  "seed:products:reset": "node seeds/seedProducts.js --reset"
+  "seed": "node src/seeds/seedAdmin.js",
+  "seed:products": "node src/seeds/seedProducts.js",
+  "seed:all": "node src/seeds/seedAdmin.js && node src/seeds/seedProducts.js",
+  "seed:products:reset": "node src/seeds/seedProducts.js --reset"
   },
   "keywords": [],
   "type": "commonjs",
