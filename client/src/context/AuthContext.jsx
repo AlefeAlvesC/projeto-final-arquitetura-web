@@ -7,13 +7,19 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Ao carregar a página, verifica se já existe um usuário e token salvos
-    const savedUser = localStorage.getItem('user');
-    const savedToken = localStorage.getItem('token');
+    try {
+      // Ao carregar a página, verifica se já existe um usuário e token salvos
+      const savedUser = localStorage.getItem('user');
+      const savedToken = localStorage.getItem('token');
 
-    if (savedUser && savedToken) {
-      setUser(JSON.parse(savedUser));
+      if (savedUser && savedToken) {
+        setUser(JSON.parse(savedUser));
+      }
+    }catch{
+      localStorage.removeItem('user');
+      localStorage.removeItem('token');
     }
+    
     setLoading(false);
   }, []);
 
